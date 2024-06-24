@@ -10,6 +10,7 @@ async function bootstrap() {
   await app
     .listen(process.env.NEST_PORT || 3375)
     .then(() => {
+      console.log("Current Database URL: ", process.env.DATABASE_NAME);
       console.log(`Application is running on port: ${process.env.NEST_PORT}`);
     }).catch((err) => {
       console.error("Error while starting application: ", err);
