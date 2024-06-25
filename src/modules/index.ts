@@ -2,6 +2,7 @@
 import { UsersModule } from "./users.module";
 import { PostsModule } from "./posts.module";
 import { CommentsModule } from "./comments.module";
+import { LikesModule } from "./likes.module";
 
 // ====== EXPORTS ======
 export {
@@ -10,6 +11,8 @@ export {
     // --> Posts Module
     PostsModule,
     // --> Comments Module
-    CommentsModule
+    CommentsModule,
+    // --> Likes Module
+    LikesModule
 }
 

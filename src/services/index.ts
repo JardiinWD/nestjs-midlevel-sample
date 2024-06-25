@@ -2,7 +2,7 @@
 import { UsersService } from "./users.service";
 import { PostsService } from "./posts.service";
 import { CommentsService } from "./comments.service";
-
+import { LikesService } from "./likes.service";
 
 // ====== EXPORTS ======
 export {
@@ -11,7 +11,9 @@ export {
     // --> Posts Service
     PostsService,
     // --> Comments Service
-    CommentsService
+    CommentsService,
+    // --> Likes Service
+    LikesService
 }
 
 

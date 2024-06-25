@@ -2,6 +2,7 @@
 import { UsersController } from "./users.controller";
 import { PostsController } from "./posts.controller";
 import { CommentsController } from "./comments.controller";
+import { LikesController } from "./likes.controller";
 
 // ====== EXPORTS ======
 export {
@@ -10,6 +11,8 @@ export {
     // --> Posts Controller
     PostsController,
     // --> Comments Controller
-    CommentsController
+    CommentsController,
+    // --> Likes Controller
+    LikesController
 }
 

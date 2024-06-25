@@ -1,7 +1,7 @@
 // ====== IMPORTS =========
 import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Column, OneToMany } from "typeorm";
 // ====== OTHER ENTITIES =========
-import { UserEntity, CommentEntity } from "@entities/index";
+import { UserEntity, CommentEntity, LikeEntity } from "@entities/index";
 import { Generic as GenericEntity } from "./generic.entity";
 
 // 1. Define an entity for posts 
@@ -24,11 +24,12 @@ export class Post extends GenericEntity {
         { onUpdate: "CASCADE", onDelete: "CASCADE" }
     )
     @JoinColumn({ name: "user_id" })
-    users: UserEntity;
+    users: UserEntity; // --> One user has many posts
 
-    @OneToMany(
-        () => CommentEntity,
-        (comment: CommentEntity) => comment.posts
-    )
-    comments: CommentEntity[]
+    @OneToMany(() => CommentEntity, (comment: CommentEntity) => comment.posts)
+    comments: CommentEntity[] // --> One post has many comments
+
+    @OneToMany(() => LikeEntity, (like: LikeEntity) => like.posts)
+    likes: LikeEntity[] // --> One post has many likes
+
 }

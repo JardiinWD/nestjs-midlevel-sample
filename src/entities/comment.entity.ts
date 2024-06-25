@@ -27,5 +27,6 @@ export class Comment extends GenericEntity {
         (post: PostEntity) => post.comments,
         { onUpdate: "CASCADE", onDelete: "CASCADE" }
     )
+    @JoinColumn({ name: "post_id" })
     posts: PostEntity;
 } 
