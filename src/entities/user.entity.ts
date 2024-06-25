@@ -1,5 +1,8 @@
 // ====== IMPORTS =========
-import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany, JoinColumn } from "typeorm";
+// ====== ENTITIES =========
+import { PostEntity } from "@entities/index";
+import { Generic as GenericEntity } from "./generic.entity";
 
 enum Roles {
     admin = "admin",
@@ -8,8 +11,8 @@ enum Roles {
 
 // 1. Define an entity for users 
 @Entity({ name: "users", synchronize: true })
-export class User {
-    @PrimaryGeneratedColumn()
+export class User extends GenericEntity {
+    @PrimaryGeneratedColumn()/*  */
     id: number; // Primary Key
 
     @Column({ length: 50, unique: true, nullable: false })
@@ -23,4 +26,8 @@ export class User {
 
     @Column({ type: 'enum', enum: Roles, default: Roles.user })
     role: Roles;
+
+    @OneToMany(() => PostEntity, (post: PostEntity) => post.users)
+    posts: PostEntity[]
+
 }

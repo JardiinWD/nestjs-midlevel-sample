@@ -1,10 +1,14 @@
 // ====== IMPORTS ======
 import { UsersService } from "./users.service";
+import { PostsService } from "./posts.service";
+
 
 // ====== EXPORTS ======
 export {
     // --> Users Service
-    UsersService
+    UsersService,
+    // --> Posts Service
+    PostsService
 }
 
 
