@@ -1,7 +1,7 @@
 // ====== IMPORTS =========
 import { Column, Entity, PrimaryGeneratedColumn, OneToMany, JoinColumn } from "typeorm";
 // ====== ENTITIES =========
-import { PostEntity } from "@entities/index";
+import { PostEntity, CommentEntity } from "@entities/index";
 import { Generic as GenericEntity } from "./generic.entity";
 
 enum Roles {
@@ -27,7 +27,10 @@ export class User extends GenericEntity {
     @Column({ type: 'enum', enum: Roles, default: Roles.user })
     role: Roles;
 
+    // ====== RELATIONS =========
     @OneToMany(() => PostEntity, (post: PostEntity) => post.users)
     posts: PostEntity[]
 
+    @OneToMany(() => CommentEntity, (comment: CommentEntity) => comment.users)
+    comments: CommentEntity[]
 }

@@ -1,7 +1,7 @@
 // ====== IMPORTS =========
-import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Column } from "typeorm";
-// ====== ENTITIES =========
-import { UserEntity } from "@entities/index";
+import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Column, OneToMany } from "typeorm";
+// ====== OTHER ENTITIES =========
+import { UserEntity, CommentEntity } from "@entities/index";
 import { Generic as GenericEntity } from "./generic.entity";
 
 // 1. Define an entity for posts 
@@ -17,6 +17,7 @@ export class Post extends GenericEntity {
     @Column({ type: "text" })
     body: string;
 
+    // ====== RELATIONS =========
     @ManyToOne(
         () => UserEntity,
         (user: UserEntity) => user.posts,
@@ -24,4 +25,10 @@ export class Post extends GenericEntity {
     )
     @JoinColumn({ name: "user_id" })
     users: UserEntity;
+
+    @OneToMany(
+        () => CommentEntity,
+        (comment: CommentEntity) => comment.posts
+    )
+    comments: CommentEntity[]
 }

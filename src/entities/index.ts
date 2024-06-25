@@ -2,6 +2,7 @@
 import { User as UserEntity } from "./user.entity";
 import { Post as PostEntity } from "./post.entity";
 import { Generic as GenericEntity } from "./generic.entity";
+import { Comment as CommentEntity } from "./comment.entity";
 
 // ====== EXPORTS ======
 export {
@@ -10,7 +11,9 @@ export {
     // --> Post Entity
     PostEntity,
     // --> Generic Entity
-    GenericEntity
+    GenericEntity,
+    // --> Comment Entity
+    CommentEntity
 }
 
 
