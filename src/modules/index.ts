@@ -3,6 +3,7 @@ import { UsersModule } from "./users.module";
 import { PostsModule } from "./posts.module";
 import { CommentsModule } from "./comments.module";
 import { LikesModule } from "./likes.module";
+import { UserFollowersModule } from "./user-followers.module";
 
 // ====== EXPORTS ======
 export {
@@ -13,6 +14,8 @@ export {
     // --> Comments Module
     CommentsModule,
     // --> Likes Module
-    LikesModule
+    LikesModule,
+    // --> User Follower Module
+    UserFollowersModule
 }
 

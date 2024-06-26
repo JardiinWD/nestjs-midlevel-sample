@@ -1,15 +1,16 @@
 // ======== MODULES =========
 import { Module, forwardRef } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsersModule, PostsModule, CommentsModule, LikesModule } from '@modules/index';
+import { UsersModule, PostsModule, CommentsModule, LikesModule, UserFollowersModule } from '@modules/index';
 // ======== CONTROLLERS =========
 import { AppController } from './app.controller';
 // ======== SERVICES =========
 import { AppService } from './app.service';
 // ======== ENTITIES =========
-import { UserEntity, PostEntity, CommentEntity, LikeEntity } from '@entities/index';
+import { UserEntity, PostEntity, CommentEntity, LikeEntity, UserFollowerEntity } from '@entities/index';
 // ======== CONFIG =========
 import { ConfigModule, ConfigService } from '@nestjs/config';
+
 
 
 @Module({
@@ -30,7 +31,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
           port: configService.get<number>('DATABASE_PORT'), // Database port from the .env file
           username: configService.get<string>('DATABASE_USER'), // Database user from the .env file
           password: configService.get<string>('DATABASE_PASSWORD'), // Database password from the .env file
-          entities: [UserEntity, PostEntity, CommentEntity, LikeEntity], // Entities to be stored in the database (Users and Reports)
+          entities: [UserEntity, PostEntity, CommentEntity, LikeEntity, UserFollowerEntity], // Entities to be stored in the database (Users and Reports)
           synchronize: true, // Set `true` to synchronize the database schema with the entities
           ssl: true, // Set `true` to enable SSL
           connection: {
@@ -45,6 +46,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     forwardRef(() => PostsModule),
     forwardRef(() => CommentsModule),
     forwardRef(() => LikesModule),
+    forwardRef(() => UserFollowersModule),
   ],
   controllers: [AppController],
   providers: [AppService],
