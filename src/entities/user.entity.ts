@@ -5,7 +5,7 @@ import { PostEntity, CommentEntity, LikeEntity, UserFollowerEntity } from "@enti
 import { Generic as GenericEntity } from "./generic.entity";
 
 
-enum Roles {
+export enum Roles {
     admin = "admin",
     user = "user"
 }
