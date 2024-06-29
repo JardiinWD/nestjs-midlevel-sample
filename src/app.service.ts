@@ -2,7 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { EntityManager } from 'typeorm';
 // ======== ENTITIES =========
-import { UserEntity, PostEntity, CommentEntity } from '@entities/index';
+import { UserEntity, PostEntity, CommentEntity, LikeEntity } from '@entities/index';
 // ======== TYPES =========
 import { Roles } from '@entities/user.entity';
 import { Seed } from 'seed.class';
@@ -29,6 +29,8 @@ export class AppService extends Seed {
     await this.seedFakeData(PostEntity);
     // Invoke the fakeIt method in the super class for CommentEntity
     await this.seedFakeData(CommentEntity);
+    // Invoke the fakeIt method in the super class for LikeEntity
+    await this.seedFakeData(LikeEntity);
   }
 
 

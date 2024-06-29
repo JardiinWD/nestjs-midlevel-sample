@@ -5,7 +5,7 @@ import { Generic as GenericEntity } from "./generic.entity";
 import { UserEntity, PostEntity } from "@entities/index";
 
 // 1. Define an enum for types of likes
-enum Type {
+export enum Type {
     happy = 'happy',
     sad = 'sad',
     angry = 'angry',
