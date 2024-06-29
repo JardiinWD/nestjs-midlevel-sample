@@ -29,7 +29,7 @@ export class User extends GenericEntity {
     role: Roles;
 
     // ====== RELATIONS =========
-    @OneToMany(() => PostEntity, (post: PostEntity) => post.users)
+    @OneToMany(() => PostEntity, (post: PostEntity) => post.user)
     posts: PostEntity[] // --> One user has many posts
 
     @OneToMany(() => CommentEntity, (comment: CommentEntity) => comment.users)

@@ -2,7 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { EntityManager } from 'typeorm';
 // ======== ENTITIES =========
-import { UserEntity } from '@entities/index';
+import { UserEntity, PostEntity, CommentEntity } from '@entities/index';
 // ======== TYPES =========
 import { Roles } from '@entities/user.entity';
 import { Seed } from 'seed.class';
@@ -15,9 +15,23 @@ export class AppService extends Seed {
   constructor(entityManager: EntityManager) {
     // Call the super class constructor with the injected EntityManager
     super(entityManager);
-    // Invoke the fakeIt method in the super class
-    this.seedFakeData(UserEntity);
+    // Invoke the fakeIt method in the super class for UserEntity 
+    this.retrieveAndSeedFakeData()
   }
+
+  /** Invoke the seedFakeData method in the super class for All Entities
+  * @return {Promise<void>} No return value.
+  */
+  private async retrieveAndSeedFakeData(): Promise<void> {
+    // Invoke the fakeIt method in the super class for UserEntity
+    await this.seedFakeData(UserEntity);
+    // Invoke the fakeIt method in the super class for PostEntity
+    await this.seedFakeData(PostEntity);
+    // Invoke the fakeIt method in the super class for CommentEntity
+    await this.seedFakeData(CommentEntity);
+  }
+
+
 }
 
 

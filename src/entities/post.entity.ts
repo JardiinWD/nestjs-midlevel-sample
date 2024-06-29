@@ -24,7 +24,7 @@ export class Post extends GenericEntity {
         { onUpdate: "CASCADE", onDelete: "CASCADE" }
     )
     @JoinColumn({ name: "user_id" })
-    users: UserEntity; // --> One user has many posts
+    user: UserEntity; // --> One user has many posts
 
     @OneToMany(() => CommentEntity, (comment: CommentEntity) => comment.posts)
     comments: CommentEntity[] // --> One post has many comments
