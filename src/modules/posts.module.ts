@@ -12,7 +12,7 @@ import { PostEntity } from '@entities/index';
 @Module({
     imports: [TypeOrmModule.forFeature([PostEntity])],
     controllers: [PostsController],
-    providers: [PostsService],
+    providers: [PostsService, PostEntity],
 })
 
 export class PostsModule { }

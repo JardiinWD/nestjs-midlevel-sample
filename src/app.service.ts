@@ -1,11 +1,14 @@
 // ======== IMPORTS =========
 import { Injectable } from '@nestjs/common';
 import { EntityManager } from 'typeorm';
+import * as dotenv from 'dotenv';
+dotenv.config();
 // ======== ENTITIES =========
 import { UserEntity, PostEntity, CommentEntity, LikeEntity, UserFollowerEntity } from '@entities/index';
 // ======== TYPES =========
 import { Roles } from '@entities/user.entity';
 import { Seed } from 'seed.class';
+
 
 
 @Injectable()
@@ -16,7 +19,7 @@ export class AppService extends Seed {
     // Call the super class constructor with the injected EntityManager
     super(entityManager);
     // Invoke the fakeIt method in the super class for UserEntity 
-    // TODO : Uncomment the line for seeding database --> this.retrieveAndSeedFakeData()
+    process.env.IS_SEEDING === 'true' ? this.retrieveAndSeedFakeData() : null;
   }
 
   /** Invoke the seedFakeData method in the super class for All Entities

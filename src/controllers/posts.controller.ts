@@ -1,13 +1,20 @@
 // ===== IMPORTS =========
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 // ===== ENTITIES =========
 import { PostEntity } from '@entities/index';
 // ===== SERVICES =========
 import { PostsService } from '@services/index';
+// ===== CRUD OPERATORS =========
+import { Crud } from '@dataui/crud';
 
-// 1. Define the controller for posts
+// 1. Initialize The @Crud decorator initializes CRUD operations for the controller based on the specified model.
+@Crud({
+    model: { type: PostEntity }
+})
+
+// 2. Define the controller for posts
 @Controller('posts')
 export class PostsController {
     // 3. Inject the service for posts
-    constructor(private readonly postsService: PostsService) { }
+    constructor(public service: PostsService) { }
 }
