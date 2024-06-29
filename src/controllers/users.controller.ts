@@ -1,27 +1,21 @@
 // ===== IMPORTS =========
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 // ===== SERVICE =========
 import { UsersService } from '@services/index';
 // ===== ENTITIES =========
 import { UserEntity } from '@entities/index';
+// ===== CRUD OPERATORS =========
+import { Crud } from '@dataui/crud';
 
+// 1. Initialize The @Crud decorator initializes CRUD operations for the controller based on the specified model.
+@Crud({
+    model: { type: UserEntity }
+})
 
-// 1. Define the controller for users
+// 2. Define the controller for users
 @Controller('users')
-// 2. Export the controller for users
 export class UsersController {
-    // 3. Inject the service for users
-    constructor(private readonly usersService: UsersService) { }
-
-    // ====== METHODS =========
-    @Get()
-    @HttpCode(HttpStatus.OK) // --> Set the HTTP status code to 200
-    /** Asynchronously retrieves all users.
-     * @return {Promise<UserEntity[]>} The list of all users
-     */
-    async findAll(): Promise<UserEntity[]> {
-        return await this.usersService.findAll();
-    }
-
+    // 3. Inject the service for users --> IT MUST BE "service" WITH CRUD Library OTHERWISE IT WILL NOT WORK
+    constructor(public service: UsersService) { }
 }
 

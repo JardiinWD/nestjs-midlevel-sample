@@ -1,19 +1,18 @@
 // ===== IMPORTS =========
 import { Controller } from '@nestjs/common';
 // ===== SERVICE =========
-import { CommentsService } from '@services/index';
+import { UserFollowersService } from '@services/index';
 // ===== ENTITIES =========
-import { CommentEntity } from '@entities/index';
+import { UserFollowerEntity } from '@entities/index';
 // ===== CRUD OPERATORS =========
 import { Crud } from '@dataui/crud';
 
-
 @Crud({
-    model: { type: CommentEntity }
+    model: { type: UserFollowerEntity }
 })
 
-@Controller('comments')
-export class CommentsController {
+@Controller('user-followers')
+export class UserFollowersController {
     // 3. Inject the service for comments --> IT MUST BE "service" WITH CRUD Library OTHERWISE IT WILL NOT WORK
-    constructor(public service: CommentsService) { }
+    constructor(public service: UserFollowersService) { }
 }

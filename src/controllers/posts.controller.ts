@@ -15,6 +15,6 @@ import { Crud } from '@dataui/crud';
 // 2. Define the controller for posts
 @Controller('posts')
 export class PostsController {
-    // 3. Inject the service for posts
+    // 3. Inject the service for posts --> IT MUST BE "service" WITH CRUD Library OTHERWISE IT WILL NOT WORK
     constructor(public service: PostsService) { }
 }

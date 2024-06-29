@@ -1,21 +1,21 @@
 // ====== IMPORTS =========
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 // ====== ENTITIES =========
 import { UserEntity } from '@entities/index';
+// ====== SERVICES =========
+import { TypeOrmCrudService } from '@dataui/crud-typeorm';
 // ====== TYPES / DTOs =========
 
 // 1. Define the injectable service for users
 @Injectable()
-export class UsersService {
+export class UsersService extends TypeOrmCrudService<UserEntity> {
     /** Initializes a new instance of the `UsersService` class.
      * @param {Repository<UserEntity>} userRepository - The repository for accessing `UserEntity` objects.
      */
-    constructor(@InjectRepository(UserEntity) private userRepository: Repository<UserEntity>) { }
-
-    // ====== METHODS =========
-    findAll(): Promise<UserEntity[]> {
-        return this.userRepository.find();
+    constructor(@InjectRepository(UserEntity) public readonly userRepository: Repository<UserEntity>) {
+        // Call the super class constructor with the injected repository for users
+        super(userRepository);
     }
 }

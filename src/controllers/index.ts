@@ -3,6 +3,7 @@ import { UsersController } from "./users.controller";
 import { PostsController } from "./posts.controller";
 import { CommentsController } from "./comments.controller";
 import { LikesController } from "./likes.controller";
+import { UserFollowersController } from "./user-followers.controller";
 
 // ====== EXPORTS ======
 export {
@@ -13,6 +14,8 @@ export {
     // --> Comments Controller
     CommentsController,
     // --> Likes Controller
-    LikesController
+    LikesController,
+    // --> User Followers Controller
+    UserFollowersController
 }
 

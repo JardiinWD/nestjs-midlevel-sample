@@ -18,7 +18,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     // Load environment variables
     ConfigModule.forRoot({
       isGlobal: true, // Set `true` for global configuration
-      envFilePath: `.env`, // Set the path to the .env file based on the NODE_ENV
+      envFilePath: `.env`, // Set the path to the .env file based on the NODE_ENV --> ${process.env.NODE_ENV}.env
     }),
     // TypeORM configuration
     TypeOrmModule.forRootAsync({
