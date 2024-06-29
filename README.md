@@ -71,3 +71,33 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+## Seeding Data 
+
+Seeding data is available in the [seed.ts](seed.ts) file. You can use it to generate fake data for your app. Uncomment the code - in `app.service.ts` below to use it.
+
+```ts
+  constructor(entityManager: EntityManager) {
+    // Call the super class constructor with the injected EntityManager
+    super(entityManager);
+    // Invoke the fakeIt method in the super class for UserEntity 
+    // THIS ---> this.retrieveAndSeedFakeData()
+  }
+
+  /** Invoke the seedFakeData method in the super class for All Entities
+  * @return {Promise<void>} No return value.
+  */
+  private async retrieveAndSeedFakeData(): Promise<void> {
+    // Invoke the fakeIt method in the super class for UserEntity
+    await this.seedFakeData(UserEntity);
+    // Invoke the fakeIt method in the super class for PostEntity
+    await this.seedFakeData(PostEntity);
+    // Invoke the fakeIt method in the super class for CommentEntity
+    await this.seedFakeData(CommentEntity);
+    // Invoke the fakeIt method in the super class for LikeEntity
+    await this.seedFakeData(LikeEntity);
+    // Invoke the fakeIt method in the super class for UserFollowerEntity
+    await this.seedFakeData(UserFollowerEntity);
+  }
+```
+

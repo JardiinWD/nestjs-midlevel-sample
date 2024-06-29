@@ -16,7 +16,7 @@ export class AppService extends Seed {
     // Call the super class constructor with the injected EntityManager
     super(entityManager);
     // Invoke the fakeIt method in the super class for UserEntity 
-    this.retrieveAndSeedFakeData()
+    // TODO : Uncomment the line for seeding database --> this.retrieveAndSeedFakeData()
   }
 
   /** Invoke the seedFakeData method in the super class for All Entities
@@ -34,8 +34,6 @@ export class AppService extends Seed {
     // Invoke the fakeIt method in the super class for UserFollowerEntity
     await this.seedFakeData(UserFollowerEntity);
   }
-
-
 }
 
 
