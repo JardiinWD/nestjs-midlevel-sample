@@ -1,10 +1,12 @@
 // ====== IMPORTS ======
-import { User as UserEntity } from "./user.entity";
+import { User as UserEntity, Roles as RolesEnum } from "./user.entity";
 import { Post as PostEntity } from "./post.entity";
 import { Generic as GenericEntity } from "./generic.entity";
 import { Comment as CommentEntity } from "./comment.entity";
-import { Like as LikeEntity } from "./like.entity";
-import { UserFollower as UserFollowerEntity } from "./user-follower.entity";
+import { Like as LikeEntity, Type as LikeEnum } from "./like.entity";
+import { UserFollower as UserFollowerEntity, Status as StatusEnum } from "./user-follower.entity";
+
+
 
 // ====== EXPORTS ======
 export {
@@ -19,7 +21,11 @@ export {
     // --> Like Entity
     LikeEntity,
     // --> User Follower Entity
-    UserFollowerEntity
+    UserFollowerEntity,
+    // --> ENUMS
+    LikeEnum,
+    StatusEnum,
+    RolesEnum
 }
 
 

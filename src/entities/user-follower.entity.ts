@@ -5,7 +5,7 @@ import { Generic as GenericEntity } from "./generic.entity";
 import { UserEntity } from "@entities/index";
 
 // 2. Define an enum for status of user followers
-enum Status {
+export enum Status {
     blocked = "blocked",
     accepted = "accepted",
     pending = "pending"

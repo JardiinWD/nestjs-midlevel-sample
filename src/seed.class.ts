@@ -4,9 +4,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 // ======== ENTITIES =========
 import { EntityManager } from "typeorm";
-import { CommentEntity, LikeEntity, PostEntity, UserEntity } from "@entities/index";
-import { Roles as RolesEnum } from '@entities/user.entity';
-import { Type as LikeEnum } from '@entities/like.entity';
+import { CommentEntity, LikeEntity, PostEntity, UserEntity, UserFollowerEntity, RolesEnum, LikeEnum, StatusEnum } from "@entities/index";
 
 
 export class Seed {
@@ -29,7 +27,6 @@ export class Seed {
     seedFakeData<T>(entity: any): Promise<void> {
         // 1. Define a switch case for different entities
         switch (entity) {
-            // 2. Add case for UserEntity
             case UserEntity:
                 // 2.1 Call the userData method
                 return this.addData(this.userData(), entity, (savedData: Array<Partial<UserEntity>>) => (this.users = savedData));
@@ -42,6 +39,9 @@ export class Seed {
             case LikeEntity:
                 // 2.4 Call the likeData method
                 return this.addData(this.likeData(), entity);
+            case UserFollowerEntity:
+                // 2.5 Call the userFollowerData method
+                return this.addData(this.followerData(), entity);
             default:
                 break;
         }
@@ -128,6 +128,22 @@ export class Seed {
         })
     }
 
+    /** Generates an array of partial UserFollowerEntity objects based on the SEED_NUMBER environment variable or 100 if not set.
+     * @private
+     * @returns {Array<Partial<UserFollowerEntity>>} An array of partial UserFollowerEntity objects representing fake follower data.
+     * @param {Partial<UserEntity>[]} followers - The array of partial UserEntity objects.
+     * @param {Partial<UserEntity>[]} following - The array of partial UserEntity objects.
+     * @param {StatusEnum[]} status - The array of StatusEnum values.
+     */
+    private followerData(): Array<Partial<UserFollowerEntity>> {
+        return this.seedingArrayLength().map<Partial<UserFollowerEntity>>(() => {
+            return {
+                followers: faker.helpers.arrayElement(this.users) as Partial<UserEntity[]>,
+                following: faker.helpers.arrayElement(this.users) as Partial<UserEntity[]>,
+                status: faker.helpers.arrayElement([StatusEnum.blocked, StatusEnum.accepted, StatusEnum.pending])
+            }
+        })
+    }
 
 
     /** Returns an array of undefined values with a length determined by the value of the
