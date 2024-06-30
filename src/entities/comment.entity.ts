@@ -13,6 +13,9 @@ export class Comment extends GenericEntity {
     @Column({ type: "text" })
     body: string;
 
+    @Column({ type: "int", nullable: false })
+    post_id: number;
+
     // ====== RELATIONS =========
     @ManyToOne(
         () => UserEntity,

@@ -17,6 +17,9 @@ export class Post extends GenericEntity {
     @Column({ type: "text" })
     body: string;
 
+    @Column({ default: 0, type: "int" })
+    comments_num: number;
+
     // ====== RELATIONS =========
     @ManyToOne(
         () => UserEntity,

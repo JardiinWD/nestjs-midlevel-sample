@@ -32,6 +32,7 @@
         "@middlewares/*": ["middlewares/*"],
         "@types/*": ["types/*"],
         "@strategies/*": ["strategies/*"],
+        "@subscribers/*": ["entities/subscribers/*"],
     },
   }
 }

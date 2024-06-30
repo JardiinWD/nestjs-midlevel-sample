@@ -8,6 +8,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 // ======== ENTITIES =========
 import { UserEntity, PostEntity, CommentEntity, LikeEntity, UserFollowerEntity } from '@entities/index';
+// ======== SUBSCRIBERS =========
+import { CommentSubscriber } from '@subscribers/index';
 // ======== CONFIG =========
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
@@ -32,6 +34,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
           username: configService.get<string>('DATABASE_USER'), // Database user from the .env file
           password: configService.get<string>('DATABASE_PASSWORD'), // Database password from the .env file
           entities: [UserEntity, PostEntity, CommentEntity, LikeEntity, UserFollowerEntity], // Entities to be stored in the database (Users and Reports)
+          subscribers: [CommentSubscriber], // Subscribers for the entities (Users and Reports)
           synchronize: true, // Set `true` to synchronize the database schema with the entities
           ssl: true, // Set `true` to enable SSL
           connection: {
