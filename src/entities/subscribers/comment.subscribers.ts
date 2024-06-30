@@ -20,23 +20,21 @@ export class CommentSubscriber implements EntitySubscriberInterface<CommentEntit
         // 2. Get the repository for comments from the event manager
         const commentRepository: Repository<CommentEntity> = event.connection.manager.getRepository<CommentEntity>('comments');
         // 3. Count the number of comments for the post
-
-        event.entity.post_id
-
-        commentRepository.count({
-            // 3.1 Specify the post id in the where clause
-            where: {
-                post_id: event.entity.post_id
-                /* posts: {
-                    id: event.entity.posts.id // post id
-                } */
-            }
-        }).then((count: number) => {
-            // 4. Update the post entity with the number of comments
-            postRepository.update(
-                { id: event.entity.post_id }, // 4.1 Specify the post id in the where clause 
-                { comments_num: count } // 4.2 Update the post entity with the number of comments
-            )
-        })
+        commentRepository
+            .count({
+                // 3.1 Specify the post id in the where clause
+                where: {
+                    posts: {
+                        id: event.entity.posts.id // post id
+                    }
+                }
+            })
+            .then((count: number) => {
+                // 4. Update the post entity with the number of comments
+                postRepository.update(
+                    { id: event.entity.post_id }, // 4.1 Specify the post id in the where clause 
+                    { comments_num: count } // 4.2 Update the post entity with the number of comments
+                )
+            })
     }
 }

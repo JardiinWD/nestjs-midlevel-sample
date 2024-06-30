@@ -18,6 +18,13 @@ export class UserFollower extends GenericEntity {
     @PrimaryGeneratedColumn()
     id: number; // Primary Key
 
+    @Column({ type: "number" })
+    followers_id: number; // User's id
+
+    @Column({ type: "number" })
+    following_id: number; // User's id
+
+
     @Column({ type: "enum", enum: Status, default: Status.pending })
     status: Status; // User's status in the relation
 

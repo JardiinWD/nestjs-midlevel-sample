@@ -37,5 +37,10 @@ export class PostsController {
     constructor(public service: PostsService) { }
 
     // ========= METHODS =========
-    // @Get()
+
+    // TODO : Custom CRUD service method IF NECESSARY (For Swagger)
+    /*     @Get('find-all')
+        findAll() {
+            return this.service.find();
+        } */
 }
