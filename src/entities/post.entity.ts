@@ -3,22 +3,41 @@ import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Column, OneToMan
 // ====== OTHER ENTITIES =========
 import { UserEntity, CommentEntity, LikeEntity } from "@entities/index";
 import { Generic as GenericEntity } from "./generic.entity";
+// ====== VALIDATORS =========
+import { IsOptional, IsDefined, IsString, IsNumber, IsEmpty } from "class-validator";
+import { CrudValidationGroups } from '@dataui/crud'
+const { CREATE, UPDATE } = CrudValidationGroups;
 
 // 1. Define an entity for posts 
 @Entity({ name: "posts", synchronize: true })
 export class Post extends GenericEntity {
 
+
     @PrimaryGeneratedColumn()
+    @IsOptional({ always: true }) // --> Validation for ID (Always)
     id: number; // Primary Key
 
-    @Column({ length: 50 })
+
+    @Column({ length: 50, unique: true }) // --> Validation
+    @IsDefined({ groups: [CREATE] }) // --> Validation for Create
+    @IsOptional({ groups: [UPDATE] }) // --> Validation for Update
+    @IsString({ always: true }) // --> Validation for String
     title: string;
 
+
     @Column({ type: "text" })
+    @IsDefined({ groups: [CREATE] }) // --> Validation for Create
+    @IsOptional({ groups: [UPDATE] }) // --> Validation for Update
+    @IsString({ always: true }) // --> Validation for String
     body: string;
 
+
     @Column({ default: 0, type: "int" })
+    @IsEmpty({ always: true }) // --> Validation for Empty (Always) --> Set `true` to always set the value to 0
     comments_num: number;
+
+    @Column({ type: "number", select: false })
+    user_id: number
 
     // ====== RELATIONS =========
     @ManyToOne(

@@ -1,11 +1,11 @@
 // ========= IMPORTS =========
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, UseInterceptors } from '@nestjs/common';
 // ========= ENTITIES =========
 import { PostEntity } from '@entities/index';
 // ========= SERVICES =========
 import { PostsService } from '@services/index';
 // ========= CRUD OPERATORS =========
-import { Crud, CrudOptions } from '@dataui/crud';
+import { Crud, CrudOptions, CrudRequest, CrudRequestInterceptor, ParsedRequest } from '@dataui/crud';
 
 // 1. Initialize The @Crud decorator initializes CRUD operations for the controller based on the specified model.
 @Crud({
@@ -25,6 +25,9 @@ import { Crud, CrudOptions } from '@dataui/crud';
             },
             'comments.users': {
                 eager: false // Set `true` to eagerly load user on each comment
+            },
+            user: {
+                eager: false
             }
         }
     }
@@ -37,6 +40,13 @@ export class PostsController {
     constructor(public service: PostsService) { }
 
     // ========= METHODS =========
+
+    /*  @UseInterceptors(CrudRequestInterceptor)
+     @Get('find-all')
+     async findAll(@ParsedRequest() req: CrudRequest) {
+         return this.service.find();
+     } */
+
 
     // TODO : Custom CRUD service method IF NECESSARY (For Swagger)
     /*     @Get('find-all')
