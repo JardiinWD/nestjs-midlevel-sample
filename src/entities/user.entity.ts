@@ -1,7 +1,7 @@
 // ====== IMPORTS =========
-import { Column, Entity, PrimaryGeneratedColumn, OneToMany, JoinColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 // ====== ENTITIES =========
-import { PostEntity, CommentEntity, LikeEntity, UserFollowerEntity } from "@entities/index";
+import { CommentEntity, LikeEntity, PostEntity, UserFollowerEntity, FileEntity } from "@entities/index";
 import { Generic as GenericEntity } from "./generic.entity";
 
 
@@ -32,6 +32,9 @@ export class User extends GenericEntity {
     @OneToMany(() => PostEntity, (post: PostEntity) => post.user)
     posts: PostEntity[] // --> One user has many posts
 
+    @OneToMany(() => FileEntity, (file: FileEntity) => file.user)
+    files: FileEntity[] // --> One user has many files
+
     @OneToMany(() => CommentEntity, (comment: CommentEntity) => comment.users)
     comments: CommentEntity[] // --> One user has many comments
 
@@ -43,5 +46,4 @@ export class User extends GenericEntity {
 
     @OneToMany(() => UserFollowerEntity, (UserFollower: UserFollowerEntity) => UserFollower.following)
     following: UserFollowerEntity[] // --> One user has many followers
-
 }

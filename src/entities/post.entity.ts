@@ -1,14 +1,14 @@
 // ====== IMPORTS =========
-import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Column, OneToMany, Repository } from "typeorm";
 import { InjectRepository } from '@nestjs/typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, Repository } from "typeorm";
 // ====== OTHER ENTITIES =========
-import { UserEntity, CommentEntity, LikeEntity } from "@entities/index";
+import { CommentEntity, LikeEntity, UserEntity, FileEntity } from "@entities/index";
 import { Generic as GenericEntity } from "./generic.entity";
 // ====== VALIDATORS =========
-import { IsOptional, IsDefined, IsString, IsNumber, IsEmpty } from "class-validator";
-import { CrudValidationGroups } from '@dataui/crud'
+import { CrudValidationGroups } from '@dataui/crud';
 import { Injectable } from "@nestjs/common";
-import { IsUniqueTitle, UniqueTitleConstraint } from "@validators/unique.validators";
+import { IsUniqueTitle } from "@validators/unique.validators";
+import { IsDefined, IsEmpty, IsOptional, IsString } from "class-validator";
 const { CREATE, UPDATE } = CrudValidationGroups;
 
 // Importing the repository type for the Post entity. This is not necessary for the entity to function, but it is useful for typing the repository.
@@ -76,6 +76,8 @@ export class Post extends GenericEntity {
     @OneToMany(() => LikeEntity, (like: LikeEntity) => like.posts)
     likes: LikeEntity[] // --> One post has many likes
 
+    @OneToMany(() => FileEntity, (file: FileEntity) => file.user)
+    files: FileEntity[] // --> One post has many files
 }
 
 
