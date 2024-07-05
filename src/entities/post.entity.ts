@@ -1,24 +1,34 @@
 // ====== IMPORTS =========
-import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Column, OneToMany, Repository } from "typeorm";
+import { InjectRepository } from '@nestjs/typeorm';
 // ====== OTHER ENTITIES =========
 import { UserEntity, CommentEntity, LikeEntity } from "@entities/index";
 import { Generic as GenericEntity } from "./generic.entity";
 // ====== VALIDATORS =========
 import { IsOptional, IsDefined, IsString, IsNumber, IsEmpty } from "class-validator";
 import { CrudValidationGroups } from '@dataui/crud'
+import { Injectable } from "@nestjs/common";
 const { CREATE, UPDATE } = CrudValidationGroups;
 
 // 1. Define an entity for posts 
 @Entity({ name: "posts", synchronize: true })
+@Injectable()
 export class Post extends GenericEntity {
 
+    // 2. Inject the repository for posts into the entity class
+    constructor(@InjectRepository(Post) postRepository: Repository<Post>) {
+        super();
+    }
+
+
+    // ====== ENTITY KEYS =========
 
     @PrimaryGeneratedColumn()
     @IsOptional({ always: true }) // --> Validation for ID (Always)
     id: number; // Primary Key
 
 
-    @Column({ length: 50, unique: true }) // --> Validation
+    @Column({ length: 50 }) // --> Validation
     @IsDefined({ groups: [CREATE] }) // --> Validation for Create
     @IsOptional({ groups: [UPDATE] }) // --> Validation for Update
     @IsString({ always: true }) // --> Validation for String
