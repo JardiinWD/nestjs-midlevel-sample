@@ -4,6 +4,7 @@ import { PostsService } from "./posts.service";
 import { CommentsService } from "./comments.service";
 import { LikesService } from "./likes.service";
 import { UserFollowersService } from "./user-followers.service";
+import { FilesService } from "./files.service";
 
 // ====== EXPORTS ======
 export {
@@ -16,7 +17,9 @@ export {
     // --> Likes Service
     LikesService,
     // --> User Follower Service
-    UserFollowersService
+    UserFollowersService,
+    // --> Files Service
+    FilesService
 }
 
 

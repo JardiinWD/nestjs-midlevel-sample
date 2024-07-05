@@ -4,6 +4,8 @@ import { PostsController } from "./posts.controller";
 import { CommentsController } from "./comments.controller";
 import { LikesController } from "./likes.controller";
 import { UserFollowersController } from "./user-followers.controller";
+import { FilesController } from "./files.controller";
+
 
 // ====== EXPORTS ======
 export {
@@ -16,6 +18,8 @@ export {
     // --> Likes Controller
     LikesController,
     // --> User Followers Controller
-    UserFollowersController
+    UserFollowersController,
+    // --> Files Controller
+    FilesController
 }
 

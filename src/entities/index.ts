@@ -5,8 +5,7 @@ import { Generic as GenericEntity } from "./generic.entity";
 import { Comment as CommentEntity } from "./comment.entity";
 import { Like as LikeEntity, Type as LikeEnum } from "./like.entity";
 import { UserFollower as UserFollowerEntity, Status as StatusEnum } from "./user-follower.entity";
-
-
+import { File as FileEntity } from "./file.entity";
 
 // ====== EXPORTS ======
 export {
@@ -22,6 +21,8 @@ export {
     LikeEntity,
     // --> User Follower Entity
     UserFollowerEntity,
+    // --> File Entity
+    FileEntity,
     // --> ENUMS
     LikeEnum,
     StatusEnum,
