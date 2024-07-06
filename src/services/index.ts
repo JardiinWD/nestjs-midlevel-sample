@@ -5,6 +5,7 @@ import { CommentsService } from './comments.service';
 import { LikesService } from './likes.service';
 import { UserFollowersService } from './user-followers.service';
 import { FilesService } from './files.service';
+import { AuthService } from './auth.service';
 // --> Generic Service
 import { GenericService } from './generic.service';
 
@@ -24,4 +25,6 @@ export {
   FilesService,
   // --> Generic Service
   GenericService,
+  // --> Auth Service
+  AuthService,
 };

@@ -5,6 +5,7 @@ import { CommentsModule } from './comments.module';
 import { LikesModule } from './likes.module';
 import { UserFollowersModule } from './user-followers.module';
 import { FilesModule } from './files.module';
+import { AuthModule } from './auth.module';
 
 // ====== EXPORTS ======
 export {
@@ -20,4 +21,6 @@ export {
   UserFollowersModule,
   // --> Files Module
   FilesModule,
+  // --> Auth Module
+  AuthModule,
 };

@@ -49,5 +49,5 @@ import { Crud } from '@dataui/crud';
 @Controller('users')
 export class UsersController {
   // 3. Inject the service for users --> IT MUST BE "service" WITH CRUD Library OTHERWISE IT WILL NOT WORK
-  constructor(public service: UsersService) { }
+  constructor(public service: UsersService) {}
 }

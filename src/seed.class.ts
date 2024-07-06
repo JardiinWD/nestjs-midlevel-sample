@@ -16,8 +16,6 @@ import {
   StatusEnum,
 } from '@entities/index';
 
-
-
 export class Seed {
   // 1. Define an array of partial UserEntity objects
   private users: Array<Partial<UserEntity>>;
