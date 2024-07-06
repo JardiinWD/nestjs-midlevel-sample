@@ -35,7 +35,7 @@ export class User extends GenericEntity {
   @Column({ type: 'enum', enum: Roles, default: Roles.user })
   role: Roles;
 
-  // @Exclude()
+  @Exclude()
   @Column({ type: 'varchar', length: 500 })
   password: string;
 
