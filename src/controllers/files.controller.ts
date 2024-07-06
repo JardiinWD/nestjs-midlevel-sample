@@ -1,23 +1,14 @@
 // ====== IMPORTS =========
-import {
-    Controller,
-    Post,
-    UseInterceptors,
-    UploadedFile,
-    Get,
-    BadRequestException,
-    Req,
-} from '@nestjs/common';
-import { readFile } from 'fs';
-import { promisify } from 'util';
+import { BadRequestException, Controller, Post, Req, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { v4 } from 'uuid';
+import { readFile } from 'fs';
 import { diskStorage } from 'multer';
-const readFileAsyc = promisify(readFile);
 import * as sharp from 'sharp';
+import { promisify } from 'util';
+import { v4 } from 'uuid';
+const readFileAsyc = promisify(readFile);
 // ====== SERVICES =========
-import { FilesService } from '@services/index';
-import { GenericService } from '@services/index';
+import { FilesService, GenericService } from '@services/index';
 // ====== ENTITIES =========
 import { FileEntity } from '@entities/index';
 // ====== CRUD =========
@@ -46,7 +37,7 @@ export class FilesController implements CrudController<FileEntity> {
      */
     constructor(public service: FilesService, genericService: GenericService) {
         FilesController.genericService = genericService;
-        this.sizes = ['25X25', '50X50', '50X50', '200X200', '400X400', '900X900'];
+        this.sizes = ['25x25', '50x50', '50x50', '200x200', '400x400', '900x900'];
     }
 
     @Post('upload')
@@ -94,13 +85,13 @@ export class FilesController implements CrudController<FileEntity> {
             throw new BadRequestException('File non trovato');
         }
         // 2. if the file exists, save it to the database
-        const [, ext] = file.mimetype.split('/');
+        // const [, ext] = file.mimetype.split('/');
         // 2.1 Save the file to the database
-        const filename = `${v4()}.${ext}`;
+        // const filename = `${v4()}.${ext}`;
         // 2.2 Save the images
-        await this.saveImages(filename, file);
+        await this.saveImages(FilesController.genericService.pocket.filename, file);
         // 3. Save the file to the database
-        return this.service.saveFileOnDatabase(file, filename);
+        return this.service.saveFileOnDatabase(file, FilesController.genericService.pocket.filename);
     }
 
     /** * Saves multiple resized versions of an image to the public/uploads directory.
@@ -113,14 +104,14 @@ export class FilesController implements CrudController<FileEntity> {
         if (['jpeg', 'jpg', 'png'].includes(ext)) {
             // 2. If the file is an image file, resize it and save it to the public/uploads directory
             this.sizes.forEach((s: string) => {
-                const [size] = s.split('X'); // 25X25 => 25
+                const [size] = s.split('x'); // 25X25 => 25
                 readFileAsyc(file.path) // read the file as a buffer
-                    .then((b: Buffer) => {
-                        return sharp(b)
+                    .then((buffer: Buffer) => {
+                        console.log("Buffer --->", buffer);
+
+                        return sharp(buffer)
                             .resize(+size) // resize the image
-                            .toFile(
-                                `${__dirname}/../../public/uploads/${s}/${FilesController.genericService.pocket.filename}`,
-                            );
+                            .toFile(`${__dirname}/../../public/uploads/${size}/${FilesController.genericService.pocket.filename}`);
                     })
                     .then(console.log)
                     .catch(console.error);
