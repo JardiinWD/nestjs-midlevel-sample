@@ -46,11 +46,13 @@ export class File extends GenericEntity {
 
     // ====== RELATIONS =========
 
-    @Column({ type: "number", select: false })
-    user_id: number
+    /* @Column({ type: "number", select: false })
+    @IsOptional({ always: true })
+    user_id: number */
 
-    @Column({ type: "number", select: false })
-    post_id: number
+    /* @Column({ type: "number", select: false })
+    @IsOptional({ always: true })
+    post_id: number */
 
     @ManyToOne(
         () => PostEntity,

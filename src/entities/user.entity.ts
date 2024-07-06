@@ -3,6 +3,7 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 // ====== ENTITIES =========
 import { CommentEntity, LikeEntity, PostEntity, UserFollowerEntity, FileEntity } from "@entities/index";
 import { Generic as GenericEntity } from "./generic.entity";
+import { IsOptional } from "class-validator";
 
 
 export enum Roles {
@@ -33,6 +34,7 @@ export class User extends GenericEntity {
     posts: PostEntity[] // --> One user has many posts
 
     @OneToMany(() => FileEntity, (file: FileEntity) => file.user)
+    @IsOptional({ always: true })
     files: FileEntity[] // --> One user has many files
 
     @OneToMany(() => CommentEntity, (comment: CommentEntity) => comment.users)
