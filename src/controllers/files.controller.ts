@@ -1,11 +1,14 @@
 // ====== IMPORTS ======
-import { Controller, Post, UseInterceptors, UploadedFile, Get } from '@nestjs/common';
+import { BadRequestException, Controller, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { v4 } from 'uuid';
-import { diskStorage } from 'multer';
+import { memoryStorage } from 'multer';
 import { readFile } from 'fs';
-import { promisify } from 'util';
+import * as fs from 'fs';
+import * as path from 'path';
+import { diskStorage } from 'multer';
 import * as sharp from 'sharp';
+import { promisify } from 'util';
+import { v4 } from 'uuid';
 // ====== SERVICES ======
 import { FilesService, GenericService } from '@services/index';
 // ====== CRUD OPERATORS ======
@@ -28,7 +31,7 @@ const readFileAsyc = promisify(readFile);
 
 
 @Controller('files')
-export class FilesController {
+export class FilesController implements CrudController<FileEntity> {
 
     // Generic service is used to interact with the database and perform
     static genericService: GenericService;
@@ -51,32 +54,7 @@ export class FilesController {
     @Post('upload')
     @UseInterceptors(
         FileInterceptor('file', {
-            storage: diskStorage({
-                /** Sets the destination path for file uploads.
-                 * This function is responsible for determining the destination path for file uploads.
-                 * @param {Express.Request} req - The request object.
-                 * @param {Express.Multer.File} file - The file object.
-                 * @param {Function} cb - The callback function.
-                 * @return {void} This function does not return a value.
-                */
-                destination: (req: Express.Request, file: Express.Multer.File, cb) =>
-                    cb(null, 'public/uploads'),
-
-                /** * Generates a unique filename for the uploaded file and passes it to the callback function.
-                 * @param {Express.Request} req - The request object.
-                 * @param {Express.Multer.File} file - The file object.
-                 * @param {Function} cb - The callback function that receives the generated filename.
-                 * @return {void} This function does not return a value.
-                 */
-                filename: (req: Express.Request, file: Express.Multer.File, cb) => {
-                    // 1. Get the extension of the uploaded file using the `mimetype` property
-                    const [, ext] = file.mimetype.split('/');
-                    // 2. Generate a unique filename using the `v4` function from the `uuid` module
-                    FilesController.genericService.pocket.filename = `${v4()}.${ext}`;
-                    // 3. Pass the generated filename to the callback function
-                    cb(null, FilesController.genericService.pocket.filename);
-                },
-            }),
+            storage: memoryStorage(),
             limits: {
                 fileSize: 1e7, // the max file size in bytes, here it's 100MB,
                 files: 1, // the max number of files that can be uploaded
@@ -88,13 +66,19 @@ export class FilesController {
      * @param {Express.Multer.File} file - The file to be uploaded.
      * @return {Promise<FileEntity>} A promise that resolves to the saved FileEntity.
      */
-    uploadFile(@UploadedFile() file: Express.Multer.File): Promise<FileEntity> {
-        // 1. Get the extension of the uploaded file
+    async uploadFile(@UploadedFile() file: Express.Multer.File): Promise<FileEntity> {
+        // Verifica se il file esiste
+        if (!file) {
+            throw new BadRequestException('File non trovato');
+        }
+        // Estrae l'estensione dal mimetype del file
         const [, ext] = file.mimetype.split('/');
-        // 2. Save the file to the database
-        this.saveImages(ext, file);
-        // 3. Return the saved file entity
-        return this.service.dbSave(file, FilesController.genericService.pocket.filename);
+        // Genera un nome file unico usando UUID
+        const filename = `${v4()}.${ext}`;
+        // Salva l'immagine fisicamente
+        await this.saveImages(filename, file);
+        // Salva i metadati del file nel database
+        return this.service.saveFileOnDatabase(file, filename);
     }
 
 
@@ -103,25 +87,27 @@ export class FilesController {
      * @param {Express.Multer.File} file - The image file to be saved.
      * @return {Promise<void>} A Promise that resolves when all resized versions of the image are saved.
      */
-    private async saveImages(ext: string, file: Express.Multer.File): Promise<void> {
-        // 1. Check if the file extension is valid
+    private async saveImages(filename: string, file: Express.Multer.File): Promise<void> {
+        // Estrae l'estensione dal mimetype del file
+        const [, ext] = file.mimetype.split('/');
+
+        // Verifica se l'estensione è tra quelle consentite
         if (['jpeg', 'jpg', 'png'].includes(ext)) {
-            // 2. If the file is an image, save the resized versions to disk
-            this.sizes.forEach((s: string) => {
-                // 2.1 Resize the image and save it to disk
-                const [size] = s.split('X');
-                // 2.2 Read the file as a Buffer
-                readFileAsyc(file.path)
-                    .then((b: Buffer) => {
-                        return sharp(b)
-                            .resize(+size)
-                            .toFile(
-                                `${__dirname}/../../public/uploads/${s}/${FilesController.genericService.pocket.filename}`,
-                            );
-                    })
-                    .then(console.log)
-                    .catch(console.error);
-            });
+            // Crea il percorso della directory di upload
+            const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
+
+            try {
+                // Crea la directory se non esiste
+                await fs.promises.mkdir(uploadsDir, { recursive: true });
+                // Crea il percorso completo del file
+                const filePath = path.join(uploadsDir, filename);
+                // Scrive il file su disco
+                await fs.promises.writeFile(filePath, file.buffer);
+                console.log('File salvato correttamente:', filePath);
+            } catch (err) {
+                console.error('Errore durante il salvataggio del file:', err);
+                throw err;
+            }
         }
     }
 

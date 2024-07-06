@@ -32,10 +32,17 @@ export class File extends GenericEntity {
     @IsEmpty({ always: true, message: "Current name cannot be empty" }) // --> Validation for Empty (Always)
     current_name: string;
 
+
     @Column({ type: "int" }) // --> Validation
     @IsNumber({}) // --> Validation for String
     @IsEmpty({ always: true, message: "Original name cannot be empty" }) // --> Validation for Empty (Always)
     size: number;
+
+
+    @Column({ length: 50 })
+    @IsString({ always: true })
+    @IsEmpty({ always: true, message: 'Extention cannot be empty' })
+    extention: string;
 
     // ====== RELATIONS =========
 
