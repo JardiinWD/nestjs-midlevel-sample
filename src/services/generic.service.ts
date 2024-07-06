@@ -9,8 +9,8 @@ import { Injectable } from '@nestjs/common';
  * and can be used with any entity that has a corresponding repository in the application.
  */
 export class GenericService {
-    pocket: any;
-    constructor() {
-        this.pocket = Object.create(null);
-    }
+  pocket: any;
+  constructor() {
+    this.pocket = Object.create(null);
+  }
 }

@@ -1,8 +1,8 @@
 // ====== IMPORTS ======
-import { CommentSubscriber } from "./comment.subscribers";
+import { CommentSubscriber } from './comment.subscribers';
 
 // ====== EXPORTS ======
 export {
-    // --> Subscribers Entities for Comments
-    CommentSubscriber
-}
+  // --> Subscribers Entities for Comments
+  CommentSubscriber,
+};

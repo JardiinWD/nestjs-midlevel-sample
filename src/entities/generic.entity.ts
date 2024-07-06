@@ -1,17 +1,24 @@
 // ====== IMPORTS =========
-import { Column, Entity, PrimaryGeneratedColumn, OneToMany, JoinColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
-
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  JoinColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 export class Generic {
-    @CreateDateColumn({
-        default: () => "CURRENT_TIMESTAMP",
-        type: "timestamp",
-    })
-    created_at: Date; // Creation date
+  @CreateDateColumn({
+    default: () => 'CURRENT_TIMESTAMP',
+    type: 'timestamp',
+  })
+  created_at: Date; // Creation date
 
-    @UpdateDateColumn({
-        default: () => "CURRENT_TIMESTAMP",
-        type: "timestamp",
-    })
-    updated_at: Date; // Update date
+  @UpdateDateColumn({
+    default: () => 'CURRENT_TIMESTAMP',
+    type: 'timestamp',
+  })
+  updated_at: Date; // Update date
 }

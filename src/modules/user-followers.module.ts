@@ -11,8 +11,6 @@ import { UserFollowersController } from '@controllers/index';
 @Module({
   imports: [TypeOrmModule.forFeature([UserFollowerEntity])],
   controllers: [UserFollowersController],
-  providers: [UserFollowersService]
+  providers: [UserFollowersService],
 })
-
-
-export class UserFollowersModule { }
+export class UserFollowersModule {}

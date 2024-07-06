@@ -9,12 +9,10 @@ import { Crud } from '@dataui/crud';
 
 // 1. Initialize The @Crud decorator initializes CRUD operations for the controller based on the specified model.
 @Crud({
-    model: { type: LikeEntity }
+  model: { type: LikeEntity },
 })
-
-
 @Controller('likes')
 export class LikesController {
-    // 3. Inject the service for likes --> IT MUST BE "service" WITH CRUD Library OTHERWISE IT WILL NOT WORK
-    constructor(public service: LikesService) { }
+  // 3. Inject the service for likes --> IT MUST BE "service" WITH CRUD Library OTHERWISE IT WILL NOT WORK
+  constructor(public service: LikesService) {}
 }

@@ -8,11 +8,9 @@ import { PostsService } from '@services/index';
 // ======== ENTITIES =========
 import { PostEntity } from '@entities/index';
 
-
 @Module({
-    imports: [TypeOrmModule.forFeature([PostEntity])],
-    controllers: [PostsController],
-    providers: [PostsService, PostEntity],
+  imports: [TypeOrmModule.forFeature([PostEntity])],
+  controllers: [PostsController],
+  providers: [PostsService, PostEntity],
 })
-
-export class PostsModule { }
+export class PostsModule {}

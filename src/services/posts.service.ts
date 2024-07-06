@@ -12,14 +12,16 @@ import { TypeOrmCrudService } from '@dataui/crud-typeorm';
 // 1. Define the injectable service for Posts
 @Injectable()
 export class PostsService extends TypeOrmCrudService<PostEntity> {
+  /** Initializes a new instance of the `PostsService` class.
+   * @param {Repository<PostEntity>} postRepository - The repository for accessing `PostEntity` objects.
+   */
+  constructor(
+    @InjectRepository(PostEntity)
+    public readonly postRepository: Repository<PostEntity>,
+  ) {
+    // Call the super class constructor with the injected repository for posts
+    super(postRepository);
+  }
 
-    /** Initializes a new instance of the `PostsService` class.
-     * @param {Repository<PostEntity>} postRepository - The repository for accessing `PostEntity` objects.
-     */
-    constructor(@InjectRepository(PostEntity) public readonly postRepository: Repository<PostEntity>) {
-        // Call the super class constructor with the injected repository for posts
-        super(postRepository);
-    }
-
-    // ====== METHODS =========
+  // ====== METHODS =========
 }

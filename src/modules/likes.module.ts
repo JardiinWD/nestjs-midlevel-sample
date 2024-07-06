@@ -9,8 +9,8 @@ import { LikesService } from '@services/index';
 import { LikeEntity } from '@entities/index';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([LikeEntity])],
-    controllers: [LikesController],
-    providers: [LikesService]
+  imports: [TypeOrmModule.forFeature([LikeEntity])],
+  controllers: [LikesController],
+  providers: [LikesService],
 })
-export class LikesModule { }
+export class LikesModule {}

@@ -10,11 +10,14 @@ import { TypeOrmCrudService } from '@dataui/crud-typeorm';
 
 @Injectable()
 export class LikesService extends TypeOrmCrudService<LikeEntity> {
-    /** Initializes a new instance of the `UsersService` class.
-     * @param {Repository<UserEntity>} likeRepository - The repository for accessing `LikeEntity` objects.
-     */
-    constructor(@InjectRepository(LikeEntity) public readonly likeRepository: Repository<LikeEntity>) {
-        // Call the super class constructor with the injected repository for likes
-        super(likeRepository);
-    }
+  /** Initializes a new instance of the `UsersService` class.
+   * @param {Repository<UserEntity>} likeRepository - The repository for accessing `LikeEntity` objects.
+   */
+  constructor(
+    @InjectRepository(LikeEntity)
+    public readonly likeRepository: Repository<LikeEntity>,
+  ) {
+    // Call the super class constructor with the injected repository for likes
+    super(likeRepository);
+  }
 }

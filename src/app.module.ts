@@ -1,18 +1,31 @@
 // ======== MODULES =========
 import { Module, forwardRef } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsersModule, PostsModule, CommentsModule, LikesModule, UserFollowersModule, FilesModule } from '@modules/index';
+import {
+  UsersModule,
+  PostsModule,
+  CommentsModule,
+  LikesModule,
+  UserFollowersModule,
+  FilesModule,
+} from '@modules/index';
 // ======== CONTROLLERS =========
 import { AppController } from './app.controller';
 // ======== SERVICES =========
 import { AppService } from './app.service';
 // ======== ENTITIES =========
-import { UserEntity, PostEntity, CommentEntity, LikeEntity, UserFollowerEntity, FileEntity } from '@entities/index';
+import {
+  UserEntity,
+  PostEntity,
+  CommentEntity,
+  LikeEntity,
+  UserFollowerEntity,
+  FileEntity,
+} from '@entities/index';
 // ======== SUBSCRIBERS =========
 import { CommentSubscriber } from '@subscribers/index';
 // ======== CONFIG =========
 import { ConfigModule, ConfigService } from '@nestjs/config';
-
 
 @Module({
   imports: [
@@ -32,14 +45,21 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
           port: configService.get<number>('DATABASE_PORT'), // Database port from the .env file
           username: configService.get<string>('DATABASE_USER'), // Database user from the .env file
           password: configService.get<string>('DATABASE_PASSWORD'), // Database password from the .env file
-          entities: [UserEntity, PostEntity, CommentEntity, LikeEntity, UserFollowerEntity, FileEntity], // Entities to be stored in the database (Users and Reports)
+          entities: [
+            UserEntity,
+            PostEntity,
+            CommentEntity,
+            LikeEntity,
+            UserFollowerEntity,
+            FileEntity,
+          ], // Entities to be stored in the database (Users and Reports)
           subscribers: [CommentSubscriber], // Subscribers for the entities (Users and Reports)
           synchronize: true, // Set `true` to synchronize the database schema with the entities
           ssl: true, // Set `true` to enable SSL
           connection: {
             // Options allow to connect to the database using a connection string
-            options: `project=${configService.get<string>('DATABASE_ENDPOINT_ID')}`
-          }
+            options: `project=${configService.get<string>('DATABASE_ENDPOINT_ID')}`,
+          },
         };
       },
     }),
@@ -49,9 +69,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     forwardRef(() => CommentsModule),
     forwardRef(() => LikesModule),
     forwardRef(() => UserFollowersModule),
-    forwardRef(() => FilesModule)
+    forwardRef(() => FilesModule),
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

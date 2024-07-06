@@ -10,15 +10,14 @@ import { FilesService, GenericService } from '@services/index';
 // ======== ENTITIES =========
 import { FileEntity } from '@entities/index';
 
-
 @Module({
   imports: [
     TypeOrmModule.forFeature([FileEntity]),
     MulterModule.register({
       storage: memoryStorage(),
-    })
+    }),
   ],
   controllers: [FilesController],
-  providers: [FilesService, GenericService]
+  providers: [FilesService, GenericService],
 })
-export class FilesModule { }
+export class FilesModule {}

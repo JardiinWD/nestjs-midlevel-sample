@@ -11,11 +11,14 @@ import { TypeOrmCrudService } from '@dataui/crud-typeorm';
 // 1. Define the injectable service for users
 @Injectable()
 export class UsersService extends TypeOrmCrudService<UserEntity> {
-    /** Initializes a new instance of the `UsersService` class.
-     * @param {Repository<UserEntity>} userRepository - The repository for accessing `UserEntity` objects.
-     */
-    constructor(@InjectRepository(UserEntity) public readonly userRepository: Repository<UserEntity>) {
-        // Call the super class constructor with the injected repository for users
-        super(userRepository);
-    }
+  /** Initializes a new instance of the `UsersService` class.
+   * @param {Repository<UserEntity>} userRepository - The repository for accessing `UserEntity` objects.
+   */
+  constructor(
+    @InjectRepository(UserEntity)
+    public readonly userRepository: Repository<UserEntity>,
+  ) {
+    // Call the super class constructor with the injected repository for users
+    super(userRepository);
+  }
 }

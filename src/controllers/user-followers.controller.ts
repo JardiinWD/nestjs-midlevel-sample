@@ -8,11 +8,10 @@ import { UserFollowerEntity } from '@entities/index';
 import { Crud } from '@dataui/crud';
 
 @Crud({
-    model: { type: UserFollowerEntity }
+  model: { type: UserFollowerEntity },
 })
-
 @Controller('user-followers')
 export class UserFollowersController {
-    // 3. Inject the service for comments --> IT MUST BE "service" WITH CRUD Library OTHERWISE IT WILL NOT WORK
-    constructor(public service: UserFollowersService) { }
+  // 3. Inject the service for comments --> IT MUST BE "service" WITH CRUD Library OTHERWISE IT WILL NOT WORK
+  constructor(public service: UserFollowersService) {}
 }

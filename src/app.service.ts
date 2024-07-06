@@ -4,27 +4,30 @@ import { EntityManager } from 'typeorm';
 import * as dotenv from 'dotenv';
 dotenv.config();
 // ======== ENTITIES =========
-import { UserEntity, PostEntity, CommentEntity, LikeEntity, UserFollowerEntity } from '@entities/index';
+import {
+  UserEntity,
+  PostEntity,
+  CommentEntity,
+  LikeEntity,
+  UserFollowerEntity,
+} from '@entities/index';
 // ======== TYPES =========
 import { Roles } from '@entities/user.entity';
 import { Seed } from 'seed.class';
 
-
-
 @Injectable()
 export class AppService extends Seed {
-
   // Inject the EntityManager in the service
   constructor(entityManager: EntityManager) {
     // Call the super class constructor with the injected EntityManager
     super(entityManager);
-    // Invoke the fakeIt method in the super class for UserEntity 
+    // Invoke the fakeIt method in the super class for UserEntity
     process.env.IS_SEEDING === 'true' ? this.retrieveAndSeedFakeData() : null;
   }
 
   /** Invoke the seedFakeData method in the super class for All Entities
-  * @return {Promise<void>} No return value.
-  */
+   * @return {Promise<void>} No return value.
+   */
   private async retrieveAndSeedFakeData(): Promise<void> {
     // Invoke the fakeIt method in the super class for UserEntity
     await this.seedFakeData(UserEntity);
@@ -38,7 +41,6 @@ export class AppService extends Seed {
     await this.seedFakeData(UserFollowerEntity);
   }
 }
-
 
 /* 
 
