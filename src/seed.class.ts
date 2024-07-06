@@ -1,5 +1,6 @@
 // ======== IMPORTS =========
 import { faker } from '@faker-js/faker';
+import { genSalt, hashSync } from 'bcrypt';
 import * as dotenv from 'dotenv';
 dotenv.config();
 // ======== ENTITIES =========
@@ -15,10 +16,13 @@ import {
   StatusEnum,
 } from '@entities/index';
 
+
+
 export class Seed {
   // 1. Define an array of partial UserEntity objects
   private users: Array<Partial<UserEntity>>;
   private posts: Array<Partial<PostEntity>>;
+  private salt: string;
 
   /** 2. Initializes the array of partial UserEntity and PostEntity objects.
    * @param {EntityManager} entityManager - The entity manager for the database connection.
@@ -32,7 +36,9 @@ export class Seed {
    * @param {any} entity - The entity for which to seed fake data.
    * @return {void} No return value.
    */
-  seedFakeData<T>(entity: any): Promise<void> {
+  async seedFakeData<T>(entity: any): Promise<void> {
+    // 0.9 call the salt method to generate a salt
+    this.salt = await genSalt(10);
     // 1. Define a switch case for different entities
     switch (entity) {
       case UserEntity:
@@ -81,6 +87,8 @@ export class Seed {
         name: `${faker.name.firstName()} ${faker.name.lastName()}`,
         role: faker.helpers.arrayElement([RolesEnum.user, RolesEnum.admin]),
         about: faker.lorem.sentence(),
+        password: hashSync(process.env.HASHSYNC_SECRET, this.salt), // --> password is generated
+        salt: this.salt, // --> this.salt is generated in the constructor
       };
     });
   }

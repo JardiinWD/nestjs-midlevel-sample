@@ -10,6 +10,7 @@ import {
 } from '@entities/index';
 import { Generic as GenericEntity } from './generic.entity';
 import { IsOptional } from 'class-validator';
+import { Exclude } from 'class-transformer';
 
 export enum Roles {
   admin = 'admin',
@@ -19,7 +20,8 @@ export enum Roles {
 // 1. Define an entity for users
 @Entity({ name: 'users', synchronize: true })
 export class User extends GenericEntity {
-  @PrimaryGeneratedColumn() /*  */ id: number; // Primary Key
+  @PrimaryGeneratedColumn()
+  id: number; // Primary Key
 
   @Column({ length: 50, unique: true, nullable: false })
   name: string; // User's name
@@ -32,6 +34,14 @@ export class User extends GenericEntity {
 
   @Column({ type: 'enum', enum: Roles, default: Roles.user })
   role: Roles;
+
+  // @Exclude()
+  @Column({ type: 'varchar', length: 500 })
+  password: string;
+
+  // @Exclude()
+  @Column({ type: 'varchar', length: 500 })
+  salt: string;
 
   // ====== RELATIONS =========
   @OneToMany(() => PostEntity, (post: PostEntity) => post.user)
