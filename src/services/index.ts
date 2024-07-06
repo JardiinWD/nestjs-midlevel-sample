@@ -5,6 +5,8 @@ import { CommentsService } from "./comments.service";
 import { LikesService } from "./likes.service";
 import { UserFollowersService } from "./user-followers.service";
 import { FilesService } from "./files.service";
+// --> Generic Service
+import { GenericService } from "./generic.service";
 
 // ====== EXPORTS ======
 export {
@@ -19,7 +21,9 @@ export {
     // --> User Follower Service
     UserFollowersService,
     // --> Files Service
-    FilesService
+    FilesService,
+    // --> Generic Service
+    GenericService
 }
 
 
