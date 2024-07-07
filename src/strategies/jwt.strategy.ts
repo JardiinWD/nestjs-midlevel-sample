@@ -8,11 +8,12 @@ dotenv.config();
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
+  // Initializes a new instance of the `JwtStrategy` class.
   constructor() {
     super({
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      ignoreExpiration: false,
-      secretOrKey: process.env.JWT_STRATEGY_SECRET,
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(), // Extract the JWT from the Authorization header
+      ignoreExpiration: false, // Ignore the expiration of the JWT
+      secretOrKey: process.env.JWT_STRATEGY_SECRET, // Use the secret key defined in the .env file
     });
   }
 
