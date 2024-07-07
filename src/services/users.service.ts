@@ -6,7 +6,6 @@ import { Repository } from 'typeorm';
 import { UserEntity } from '@entities/index';
 // ====== SERVICES =========
 import { TypeOrmCrudService } from '@dataui/crud-typeorm';
-// ====== TYPES / DTOs =========
 
 // 1. Define the injectable service for users
 @Injectable()

@@ -43,6 +43,8 @@ export class User extends GenericEntity {
   @Column({ type: 'varchar', length: 500 })
   salt: string;
 
+  access_token?: string;
+
   // ====== RELATIONS =========
   @OneToMany(() => PostEntity, (post: PostEntity) => post.user)
   posts: PostEntity[]; // --> One user has many posts
