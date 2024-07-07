@@ -1,10 +1,9 @@
 // ====== IMPORTS =========
 import { Injectable } from '@nestjs/common';
-import { genSalt, hashSync } from 'bcrypt';
-import { CrudRequest } from '@dataui/crud';
+import { hashSync } from 'bcrypt';
 // ====== SERVICES =========
-import { UsersService } from '@services/index';
 import { JwtService } from '@nestjs/jwt';
+import { UsersService } from '@services/index';
 // ====== ENTITIES =========
 import { UserEntity } from '@entities/index';
 
@@ -18,7 +17,7 @@ export class AuthService {
   constructor(
     public readonly userService: UsersService,
     private readonly jwtService: JwtService,
-  ) {}
+  ) { }
 
   /** Validates a user based on the provided email and password.
    * @param {string} email - The email of the user to validate.

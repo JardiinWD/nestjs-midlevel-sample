@@ -7,7 +7,7 @@ import { PostsService } from '@services/index';
 // ========= CRUD OPERATORS =========
 import { Crud, CrudAuth, CrudOptions } from '@dataui/crud';
 // ========= GUARDS =========
-import { JwtAuthGuard, IsOwnerGuard } from '@guards/index';
+import { JwtAuthGuard } from '@guards/index';
 
 // 1. Initialize The @Crud decorator initializes CRUD operations for the controller based on the specified model.
 @Crud({
