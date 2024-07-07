@@ -1,11 +1,12 @@
 // ===== IMPORTS =========
-import { Controller } from '@nestjs/common';
+import { Controller, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '@guards/index';
 // ===== SERVICE =========
 import { UsersService } from '@services/index';
 // ===== ENTITIES =========
 import { UserEntity } from '@entities/index';
 // ===== CRUD OPERATORS =========
-import { Crud } from '@dataui/crud';
+import { Crud, CrudAuth } from '@dataui/crud';
 
 // 1. Initialize The @Crud decorator initializes CRUD operations for the controller based on the specified model.
 @Crud({
@@ -44,6 +45,13 @@ import { Crud } from '@dataui/crud';
       },
     },
   },
+})
+// 2. Define the guard for users
+@UseGuards(JwtAuthGuard)
+@CrudAuth({
+  property: 'user', // Define the property for the user
+  // Define the filter for the user
+  filter: (user: UserEntity) => ({ id: user.id }),
 })
 // 2. Define the controller for users
 @Controller('users')

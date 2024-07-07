@@ -27,7 +27,6 @@ import { CommentSubscriber } from '@subscribers/index';
 // ======== CONFIG =========
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './modules/auth.module';
-import { AuthController } from './controllers/auth.controller';
 
 @Module({
   imports: [
@@ -77,4 +76,4 @@ import { AuthController } from './controllers/auth.controller';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
