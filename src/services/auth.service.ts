@@ -18,7 +18,7 @@ export class AuthService {
   constructor(
     public readonly userService: UsersService,
     private readonly jwtService: JwtService,
-  ) { }
+  ) {}
 
   /** Validates a user based on the provided email and password.
    * @param {string} email - The email of the user to validate.
@@ -54,9 +54,15 @@ export class AuthService {
     };
   }
 
+  /** Registers a new user in the system.
+   * @param {Partial<UserEntity>} user - The user object containing the partial information to be registered.
+   * @return {Promise<Partial<UserEntity>>} A promise that resolves to the registered user object if successful, or an error if registration fails.
+   */
   async register(user: Partial<UserEntity>): Promise<Partial<UserEntity>> {
     try {
+      // 1. Invoke the save method in the user repository
       const data = await this.userService.userRepository.save(user);
+      // 2. Return the user object
       return data;
     } catch (error) {
       return error;
