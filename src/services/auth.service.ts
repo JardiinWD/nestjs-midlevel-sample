@@ -17,7 +17,7 @@ export class AuthService {
   constructor(
     public readonly userService: UsersService,
     private readonly jwtService: JwtService,
-  ) { }
+  ) {}
 
   /** Validates a user based on the provided email and password.
    * @param {string} email - The email of the user to validate.

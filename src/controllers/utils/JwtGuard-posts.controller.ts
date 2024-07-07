@@ -52,7 +52,7 @@ import { JwtAuthGuard } from '@guards/index';
 @Controller('posts')
 export class JwtGuardPostsController {
   // 4. Inject the service for posts --> IT MUST BE "service" WITH CRUD Library OTHERWISE IT WILL NOT WORK
-  constructor(public service: PostsService) { }
+  constructor(public service: PostsService) {}
 
   // ========= METHODS =========
 }

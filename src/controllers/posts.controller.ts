@@ -12,7 +12,7 @@ import {
   CrudRequest,
   Override,
   ParsedBody,
-  ParsedRequest
+  ParsedRequest,
 } from '@dataui/crud';
 // ========= GUARDS =========
 import { IsOwnerGuard, JwtAuthGuard } from '@guards/index';
@@ -53,7 +53,7 @@ import { IsOwnerGuard, JwtAuthGuard } from '@guards/index';
 @Controller('posts')
 export class PostsController implements CrudController<PostEntity> {
   // 4. Inject the service for posts --> IT MUST BE "service" WITH CRUD Library OTHERWISE IT WILL NOT WORK
-  constructor(public service: PostsService) { }
+  constructor(public service: PostsService) {}
 
   // ========= METHODS =========
 

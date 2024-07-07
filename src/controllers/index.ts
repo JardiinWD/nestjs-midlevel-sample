@@ -9,7 +9,6 @@ import { AuthController } from './auth.controller';
 // --> JWT Controller
 import { JwtGuardPostsController } from './utils/JwtGuard-posts.controller';
 
-
 // ====== EXPORTS ======
 export {
   // --> Users Controller
@@ -27,5 +26,5 @@ export {
   // --> Auth Controller
   AuthController,
   // --> JWT Controller
-  JwtGuardPostsController
+  JwtGuardPostsController,
 };

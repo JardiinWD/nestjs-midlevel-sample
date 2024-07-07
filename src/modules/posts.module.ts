@@ -13,4 +13,4 @@ import { PostEntity } from '@entities/index';
   controllers: [PostsController, JwtGuardPostsController],
   providers: [PostsService, PostEntity],
 })
-export class PostsModule { }
+export class PostsModule {}
