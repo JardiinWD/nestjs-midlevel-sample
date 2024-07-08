@@ -1,103 +1,49 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# NestJS Midlevel Sample
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This project is a sample of a mid-level application using NestJS. It includes CRUD operations for Users, Posts, Comments, Likes, User Followers and Files. It also includes authentication and authorization using JWT. All entities are defined in the `src/entities` folder, and services, controllers and modules are defined in the `src/modules` and `src/controllers` folders. The application uses TypeORM for database operations and Multer for file uploads. It also includes a seed script to populate the database with sample data.
 
 ## Installation
 
-```bash
-$ yarn install
-```
-
-## Running the app
+To install the project, run the following command:
 
 ```bash
-# development
-$ yarn run start
-
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
+yarn install
 ```
 
-## Test
+## Configuration and Environment Variables
+
+You need to configure the environment variables in the `.env` file.
+
+```env
+DATABASE_HOST='YOUR_DATABASE_HOST'
+DATABASE_USER='YOUR_DATABASE_USER'
+DATABASE_PORT=YOUR_DATABASE_PORT
+DATABASE_ENDPOINT_ID='YOUR_DATABASE_ENDPOINT_ID'
+DATABASE_NAME='YOUR_DATABASE_NAME'
+DATABASE_PASSWORD='YOUR_DATABASE_PASSWORD'
+
+# ====== PORTS ====== #
+NEST_PORT=YOUR_NEST_PORT
+
+# ====== SEEDING ====== #
+SEED_NUMBER = HOW_MANY_SEEDS_TO_GENERATE
+IS_SEEDING = BOOLEAN
+HASHSYNC_SECRET = 'YOUR_HASHSYNC_SECRET'
+
+# ====== JWT STRATEGIES ====== #
+JWT_STRATEGY_SECRET = 'YOUR_JWT_STRATEGY_SECRET'
+JWT_EXPIRES_IN = 'YOUR_JWT_EXPIRES_IN'
+```
+
+## Running the application
+
+To run the application, run the following command:
 
 ```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
+yarn start:dev
 ```
 
-## Support
+## Folders
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
-
-## Seeding Data 
-
-Seeding data is available in the [seed.ts](seed.ts) file. You can use it to generate fake data for your app. Uncomment the code - in `app.service.ts` below to use it.
-
-```ts
-  constructor(entityManager: EntityManager) {
-    // Call the super class constructor with the injected EntityManager
-    super(entityManager);
-    // Invoke the fakeIt method in the super class for UserEntity 
-    // THIS ---> this.retrieveAndSeedFakeData()
-  }
-
-  /** Invoke the seedFakeData method in the super class for All Entities
-  * @return {Promise<void>} No return value.
-  */
-  private async retrieveAndSeedFakeData(): Promise<void> {
-    // Invoke the fakeIt method in the super class for UserEntity
-    await this.seedFakeData(UserEntity);
-    // Invoke the fakeIt method in the super class for PostEntity
-    await this.seedFakeData(PostEntity);
-    // Invoke the fakeIt method in the super class for CommentEntity
-    await this.seedFakeData(CommentEntity);
-    // Invoke the fakeIt method in the super class for LikeEntity
-    await this.seedFakeData(LikeEntity);
-    // Invoke the fakeIt method in the super class for UserFollowerEntity
-    await this.seedFakeData(UserFollowerEntity);
-  }
-```
-
+In every folder there is a `readme.md` file that explains the purpose of the folder.
