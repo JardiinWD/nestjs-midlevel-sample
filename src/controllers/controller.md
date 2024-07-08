@@ -130,48 +130,6 @@ These options are necessary because the `UserEntity` has relationships with othe
 
 Overall, the `@Crud` decorator is used to configure the CRUD operations for the `UserEntity` in a way that includes the necessary joins and excludes sensitive fields.
 
-
-```typescript
-@Crud({
-  model: { type: UserEntity },
-  routes: {
-    exclude: ['createManyBase', 'createOneBase'],
-  },
-  query: {
-    exclude: ['salt'],
-    limit: 10,
-    alwaysPaginate: true,
-    join: {
-      // 1. Define the Join for posts
-      posts: {
-        eager: true,
-      },
-      // 1.2 Define the Join for followers
-      followers: {
-        eager: true,
-      },
-      // 1.3 Define the Join for following
-      following: {
-        eager: true,
-      },
-      // 1.4 Define the Join for followers
-      'followers.followers': {
-        eager: true,
-        exclude: ['salt'], // IT IS NOT OPTIONAL IN THIS CASE.
-        alias: 'user_followers', // Alias for the join table (in order to avoid conflicts)
-      },
-      // 1.5 Define the Join for following
-      'following.following': {
-        eager: true,
-        exclude: ['salt'], // IT IS NOT OPTIONAL IN THIS CASE.
-        alias: 'user_following', // Alias for the join table (in order to avoid conflicts)
-      },
-    },
-  },
-})
-```
-
-
 <!-- Look at the script below. Check what it does then write a short description of the methods that are written within. Maybe with a table of contents? | methods | description | params | -->
 
 <!-- Look at the script below. Check what it does then write a short description of what it does (and why) -->
