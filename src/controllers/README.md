@@ -133,3 +133,5 @@ Overall, the `@Crud` decorator is used to configure the CRUD operations for the 
 <!-- Look at the script below. Check what it does then write a short description of the methods that are written within. Maybe with a table of contents? | methods | description | params | -->
 
 <!-- Look at the script below. Check what it does then write a short description of what it does (and why) -->
+
+<!-- Look at the script below. Check what it does then write a description of what it does (and why). As I said earlier you must check the snippet within the ```typescript  and write a documentation for it. Write as many thing as possible about the snippet and what it does. Don't forget anything -->
