@@ -1,5 +1,3 @@
-# src/entities/README.md
-
 ## Entity Definitions
 
 This folder contains the definitions for the entities in the application.
