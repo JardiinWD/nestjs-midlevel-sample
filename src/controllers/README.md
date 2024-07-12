@@ -1,13 +1,13 @@
 
 ## Controller Definitions
 
-- **[users.controller.ts](src/controllers/users.controller.ts)**: This file contains the controller for the Users entity. It provides CRUD operations for the UserEntity.
-- **[posts.controller.ts](src/controllers/posts.controller.ts)**: This file contains the controller for the Posts entity. It provides CRUD operations for the PostEntity.
-- **[comments.controller.ts](src/controllers/comments.controller.ts)**: This file contains the controller for the Comments entity. It provides CRUD operations for the CommentEntity.
-- **[likes.controller.ts](src/controllers/likes.controller.ts)**: This file contains the controller for the Likes entity. It provides CRUD operations for the LikeEntity.
-- **[user-followers.controller.ts](src/controllers/user-followers.controller.ts)**: This file contains the controller for the UserFollowers entity. It provides CRUD operations for the UserFollowerEntity.
-- **[files.controller.ts](src/controllers/files.controller.ts)**: This file contains the controller for the Files entity. It provides CRUD operations for the FileEntity.
-- **[auth.controller.ts](src/controllers/auth.controller.ts)**: This file contains the controller for authentication. It provides methods for user registration and login.
+- **[users.controller.ts](users.controller.ts)**: This file contains the controller for the Users entity. It provides CRUD operations for the UserEntity.
+- **[posts.controller.ts](posts.controller.ts)**: This file contains the controller for the Posts entity. It provides CRUD operations for the PostEntity.
+- **[comments.controller.ts](comments.controller.ts)**: This file contains the controller for the Comments entity. It provides CRUD operations for the CommentEntity.
+- **[likes.controller.ts](likes.controller.ts)**: This file contains the controller for the Likes entity. It provides CRUD operations for the LikeEntity.
+- **[user-followers.controller.ts](user-followers.controller.ts)**: This file contains the controller for the UserFollowers entity. It provides CRUD operations for the UserFollowerEntity.
+- **[files.controller.ts](files.controller.ts)**: This file contains the controller for the Files entity. It provides CRUD operations for the FileEntity.
+- **[auth.controller.ts](auth.controller.ts)**: This file contains the controller for authentication. It provides methods for user registration and login.
 
 
 ## users.controller.ts

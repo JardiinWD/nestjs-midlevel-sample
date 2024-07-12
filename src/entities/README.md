@@ -4,13 +4,13 @@ This folder contains the definitions for the entities in the application.
 
 ### Entities
 
-- **[comment.entity.ts](src/entities/comment.entity.ts)**: This file contains the definition for the Comment entity.
-- **[file.entity.ts](src/entities/file.entity.ts)**: This file contains the definition for the File entity.
-- **[generic.entity.ts](src/entities/generic.entity.ts)**: This file contains the definition for the Generic entity.
-- **[like.entity.ts](src/entities/like.entity.ts)**: This file contains the definition for the Like entity.
-- **[post.entity.ts](src/entities/post.entity.ts)**: This file contains the definition for the Post entity.
-- **[user.entity.ts](src/entities/user.entity.ts)**: This file contains the definition for the User entity.
-- **[user-follower.entity.ts](src/entities/user-follower.entity.ts)**: This file contains the definition for the UserFollower entity.
+- **[comment.entity.ts](comment.entity.ts)**: This file contains the definition for the Comment entity.
+- **[file.entity.ts](file.entity.ts)**: This file contains the definition for the File entity.
+- **[generic.entity.ts](generic.entity.ts)**: This file contains the definition for the Generic entity.
+- **[like.entity.ts](like.entity.ts)**: This file contains the definition for the Like entity.
+- **[post.entity.ts](post.entity.ts)**: This file contains the definition for the Post entity.
+- **[user.entity.ts](user.entity.ts)**: This file contains the definition for the User entity.
+- **[user-follower.entity.ts](user-follower.entity.ts)**: This file contains the definition for the UserFollower entity.
 
 ## Subscribers
 
