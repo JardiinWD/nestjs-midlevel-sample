@@ -14,13 +14,13 @@ async function bootstrap() {
   // Database Connection
   const configService = app.get(ConfigService);
   // Get the PORT 
-  const port = configService.get('DATABASE_PORT');
+  const port = configService.get('NEST_PORT');
 
   await app
     .listen(port || 3375)
     .then(() => {
       console.log('Current Database URL: ', configService.get('DATABASE_NAME'));
-      console.log(`Application is running on port`, configService.get('DATABASE_PORT'));
+      console.log(`Application is running on port`, configService.get('NEST_PORT'));
     })
     .catch((err) => {
       console.error('Error while starting application: ', err.message);
