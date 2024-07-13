@@ -27,42 +27,25 @@ import { CommentSubscriber } from '@subscribers/index';
 // ======== CONFIG =========
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './modules/auth.module';
+import { AppConfig, DatabaseConfig } from '@config/index';
+
+
 
 @Module({
   imports: [
     // Load environment variables
     ConfigModule.forRoot({
       isGlobal: true, // Set `true` for global configuration
-      envFilePath: `.env`, // Set the path to the .env file based on the NODE_ENV --> ${process.env.NODE_ENV}.env
+      cache: true,
+      load: [AppConfig, DatabaseConfig],
     }),
     // TypeORM configuration
     TypeOrmModule.forRootAsync({
-      inject: [ConfigService], // Inject the ConfigService in the AppModule
-      useFactory: async (configService: ConfigService) => {
-        return {
-          type: 'postgres', // Neon PostgreSQL database type
-          host: configService.get<string>('DATABASE_HOST'), // Database host from the .env file
-          database: configService.get<string>('DATABASE_NAME'), // Database name from the .env file
-          port: configService.get<number>('DATABASE_PORT'), // Database port from the .env file
-          username: configService.get<string>('DATABASE_USER'), // Database user from the .env file
-          password: configService.get<string>('DATABASE_PASSWORD'), // Database password from the .env file
-          entities: [
-            UserEntity,
-            PostEntity,
-            CommentEntity,
-            LikeEntity,
-            UserFollowerEntity,
-            FileEntity,
-          ], // Entities to be stored in the database (Users and Reports)
-          subscribers: [CommentSubscriber], // Subscribers for the entities (Users and Reports)
-          synchronize: true, // Set `true` to synchronize the database schema with the entities
-          ssl: true, // Set `true` to enable SSL
-          connection: {
-            // Options allow to connect to the database using a connection string
-            options: `project=${configService.get<string>('DATABASE_ENDPOINT_ID')}`,
-          },
-        };
-      },
+      imports: [ConfigModule], // Import the ConfigModule 
+      useFactory: (configService: ConfigService) => ({
+        ...configService.get('database'),
+      }),
+      inject: [ConfigService], // Inject the ConfigService
     }),
     // Other imports
     forwardRef(() => UsersModule),
@@ -76,4 +59,4 @@ import { AuthModule } from './modules/auth.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

@@ -33,6 +33,7 @@
         "@types/*": ["types/*"],
         "@strategies/*": ["strategies/*"],
         "@subscribers/*": ["entities/subscribers/*"],
+        "@config/*" : ["config/*"]
     },
   }
 }

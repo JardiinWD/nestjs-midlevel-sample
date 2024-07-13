@@ -1,8 +1,8 @@
 {
   "name": "nest-midlevel-sample",
   "version": "1.0.0",
-  "description": "",
-  "author": "",
+  "description": "Repository containing a complete project in C.R.U.D in Neon PostgreSQL, Faker, JWT Authentication, TypeORM, Custom Guards, and Multer ",
+  "author": "Alessandro Pecorilla",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
