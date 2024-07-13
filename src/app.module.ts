@@ -13,21 +13,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 // ======== SERVICES =========
 import { AppService } from './app.service';
-// ======== ENTITIES =========
-import {
-  CommentEntity,
-  FileEntity,
-  LikeEntity,
-  PostEntity,
-  UserEntity,
-  UserFollowerEntity,
-} from '@entities/index';
-// ======== SUBSCRIBERS =========
-import { CommentSubscriber } from '@subscribers/index';
 // ======== CONFIG =========
+import { AppConfig, DatabaseConfig } from '@config/index';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './modules/auth.module';
-import { AppConfig, DatabaseConfig } from '@config/index';
 
 
 

@@ -19,7 +19,7 @@ async function bootstrap() {
   await app
     .listen(port || 3375)
     .then(() => {
-      console.log('Current Database URL: ', configService.get('DATABASE_NAME'));
+      console.log('Current Database Name:', configService.get('DATABASE_NAME'));
       console.log(`Application is running on port`, configService.get('NEST_PORT'));
     })
     .catch((err) => {
