@@ -1,12 +1,12 @@
 // ======== IMPORTS =========
 import {
-  Controller,
-  Request,
-  Post,
-  UseGuards,
   Body,
+  Controller,
   HttpException,
   HttpStatus,
+  Post,
+  Request,
+  UseGuards,
 } from '@nestjs/common';
 import { genSalt, hashSync } from 'bcrypt';
 // ======== SERVICES =========
@@ -14,17 +14,21 @@ import { AuthService } from '@services/index';
 // ======== GUARDS =========
 import { LocalAuthGuard } from '@guards/index';
 // ======== ENTITITES =========
-import { UserEntity, RolesEnum as Roles } from '@entities/index';
+import { RolesEnum as Roles, UserEntity } from '@entities/index';
+import { SkipThrottle, Throttle } from '@nestjs/throttler';
 
+
+@SkipThrottle()
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private readonly authService: AuthService) { }
 
   /** Asynchronously handles the login request.
    * @param {@Request()} req - The Express Request object.
    * @return {Promise<any>} A Promise that resolves with the result of the login operation.
    */
   @UseGuards(LocalAuthGuard)
+  @Throttle({ default: { limit: 2, ttl: 10 } })
   @Post('login')
   async login(@Request() req: Express.Request) {
     return this.authService.login(req.user);
